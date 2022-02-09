@@ -31,8 +31,6 @@ export class SelectionsService {
     return this.tileModel.find().exec();
   }
   async getByBoundaries(indexes: String[]): Promise<ITile[]> {
-    // await this.tileModel.deleteMany({});
-    // await this.selectionModel.deleteMany({});
     return await this.tileModel.find({ index: { $in: indexes } });
   }
   async getOne(userId: string): Promise<ISelection> {
