@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors();
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ limit: '50mb', extended: true }));
-  await app.listen(8080);
+  await app.listen(process.env.PORT ? process.env.PORT : 8080);
   if (module.hot) {
     module.hot.accept();
     module.hot.dispose(() => app.close());
