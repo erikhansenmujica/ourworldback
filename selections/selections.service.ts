@@ -14,18 +14,13 @@ export class SelectionsService {
     const createdSelection = new this.selectionModel(createSelection);
     return createdSelection.save();
   }
-  async findAll(): Promise<ISelection[]> {
-    return this.selectionModel.find().exec();
-  }
+
   async getByBoundaries(point: Number[]): Promise<any[]> {
     return await this.selectionModel.find({
       geometry: {
         $geoWithin: { $centerSphere: [point, 10 / 3963.2] },
       },
     });
-  }
-  async getOne(userId: string): Promise<ISelection> {
-    return this.selectionModel.findOne({ userId });
   }
 }
 

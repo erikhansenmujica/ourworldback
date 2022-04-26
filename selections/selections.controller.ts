@@ -6,14 +6,7 @@ import { SelectionsService } from './selections.service';
 @Controller('/selections')
 export class SelectionController {
   constructor(private readonly selectionService: SelectionsService) {}
-  @Get('/all')
-  async getSelections(): Promise<ISelection[]> {
-    return await this.selectionService.findAll();
-  }
-  @Get('/one/:id')
-  async getSelection(@Param('id') id: string): Promise<ISelection> {
-    return await this.selectionService.getOne(id);
-  }
+
   @Post('/in/boundaries')
   async getTilesByBoundaries(
     @Body() indexes: { data: number[] },
