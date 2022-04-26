@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { bigArray } from './bigArray';
+import mongoose from 'mongoose';
 import { ISelection } from './interfaces/selection.interface';
-import { ITile } from './interfaces/tile.interface';
 import { SelectionsService } from './selections.service';
 
 @Controller('/selections')
@@ -11,10 +10,6 @@ export class SelectionController {
   async getSelections(): Promise<ISelection[]> {
     return await this.selectionService.findAll();
   }
-  @Get('/all/tiles')
-  async getAllTiles(): Promise<ITile[]> {
-    return await this.selectionService.findAllOwnedTiles();
-  }
   @Get('/one/:id')
   async getSelection(@Param('id') id: string): Promise<ISelection> {
     return await this.selectionService.getOne(id);
@@ -22,13 +17,13 @@ export class SelectionController {
   @Post('/in/boundaries')
   async getTilesByBoundaries(
     @Body() indexes: { data: String[] },
-  ): Promise<ITile[]> {
+  ): Promise<any[]> {
     const res = await this.selectionService.getByBoundaries(indexes.data);
     return res;
   }
   @Post('/new')
   async createSelection(
-    @Body() body: { userId: string; ownedTiles: String[] },
+    @Body() body: { userId: string; geometry: mongoose.Schema.Types.Geometry },
   ): Promise<ISelection> {
     return await this.selectionService.create(body);
   }

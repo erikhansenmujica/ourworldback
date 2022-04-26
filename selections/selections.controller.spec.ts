@@ -10,11 +10,5 @@ describe('SelectionsController', () => {
       providers: [SelectionsService],
     }).compile();
   });
-  describe('getAllTiles', () => {
-    it('should return an array', () => {
-      const selectionController =
-        selections.get<SelectionController>(SelectionController);
-      expect(typeof selectionController.getAllTiles()).toBe([]);
-    });
-  });
+  describe('getAllTiles', () => {});
 });
