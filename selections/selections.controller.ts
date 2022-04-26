@@ -16,7 +16,7 @@ export class SelectionController {
   }
   @Post('/in/boundaries')
   async getTilesByBoundaries(
-    @Body() indexes: { data: String[] },
+    @Body() indexes: { data: number[] },
   ): Promise<any[]> {
     const res = await this.selectionService.getByBoundaries(indexes.data);
     return res;
@@ -25,6 +25,7 @@ export class SelectionController {
   async createSelection(
     @Body() body: { userId: string; geometry: mongoose.Schema.Types.Geometry },
   ): Promise<ISelection> {
+    console.log(body);
     return await this.selectionService.create(body);
   }
 }

@@ -20,13 +20,7 @@ export class SelectionsService {
   async getByBoundaries(point: Number[]): Promise<any[]> {
     return await this.selectionModel.find({
       geometry: {
-        $geoNear: {
-          $geometry: {
-            type: 'Point',
-            coordinates: point,
-          },
-          $maxDistance: 50000,
-        },
+        $geoWithin: { $centerSphere: [point, 10 / 3963.2] },
       },
     });
   }
